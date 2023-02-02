@@ -1,14 +1,19 @@
 module.exports = (sequelize, DataTypes) => {
-  const Order = sequelize.define("Order", {
-    orderDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
+  const Order = sequelize.define(
+    "Order",
+    {
+      picture_money: {
+        type: DataTypes.STRING,
+        defaultValue: "Please upload your script",
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
-    moneyPic: DataTypes.STRING,
-    priceBfTax: DataTypes.FLOAT,
-    tax: DataTypes.FLOAT,
-  },{
-    underscored: true,
-  });
+    {
+      underscored: true,
+    }
+  );
   return Order;
 };

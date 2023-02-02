@@ -14,5 +14,8 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+  Manufacturer.associate = models => {
+    
+  }
   return Manufacturer;
 };

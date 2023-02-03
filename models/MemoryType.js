@@ -10,5 +10,24 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+
+  MemoryType.associate = models => {
+    MemoryType.hasMany(models.Motherboard,{
+    foreignKey:{
+      name: 'memory_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+  MemoryType.hasMany(models.Memory,{
+    foreignKey:{
+      name: 'memory_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+}
   return MemoryType;
 };

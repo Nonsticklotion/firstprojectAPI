@@ -24,5 +24,24 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  Memory.associate = models => {
+    Memory.belongsTo(models.Manufacturer, {
+      foreignKey: {
+        name: 'manufac_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Memory.belongsTo(models.MemoryType, {
+      foreignKey: {
+        name: 'memory_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+  };
   return Memory;
 };

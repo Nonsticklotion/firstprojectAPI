@@ -10,5 +10,15 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  GpuChipset.associate = models => {
+    GpuChipset.hasMany(models.VideoCard,{
+    foreignKey:{
+      name: 'gpu_chipset_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+}
   return GpuChipset;
 };

@@ -10,5 +10,24 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  MbFormfactor.associate = models => {
+    MbFormfactor.hasMany(models.Motherboard,{
+    foreignKey:{
+      name: 'mb_formfactor_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+
+  MbFormfactor.hasMany(models.Case,{
+    foreignKey:{
+      name: 'mb_formfactor_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+}
   return MbFormfactor;
 };

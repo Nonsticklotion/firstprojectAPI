@@ -10,5 +10,15 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  StorageType.associate = models => {
+    StorageType.hasMany(models.Storage,{
+    foreignKey:{
+      name: 'storage_type_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+}
   return StorageType
 };

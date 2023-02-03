@@ -14,5 +14,25 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+  VideoCard.associate = (models) => {
+    VideoCard.belongsTo(models.Manufacturer, {
+      foreignKey: {
+        name: "manufac_name",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
+
+    VideoCard.belongsTo(models.GpuChipset, {
+      foreignKey: {
+        name: "chipset_name",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
+
+  };
   return VideoCard;
 };

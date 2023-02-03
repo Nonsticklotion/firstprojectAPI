@@ -17,5 +17,33 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  Storage.associate = models => {
+    Storage.belongsTo(models.Manufacturer, {
+      foreignKey: {
+        name: 'manufac_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Storage.belongsTo(models.StorageType, {
+      foreignKey: {
+        name: 'storage',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Storage.belongsTo(models.StorageFormfactor, {
+      foreignKey: {
+        name: 'storage_form',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+  };
   return Storage;
 };

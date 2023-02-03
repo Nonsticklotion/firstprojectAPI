@@ -10,5 +10,16 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+
+  MbChipset.associate = models => {
+  MbChipset.hasMany(models.Motherboard,{
+    foreignKey:{
+      name: 'mb_chipset_id',
+      allowNull: false
+    },
+    onUpdate: 'RESTRICT',
+    onDelete: 'RESTRICT'
+  });
+}
   return MbChipset;
 };

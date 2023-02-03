@@ -14,5 +14,15 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+  CaseType.associate = (models) => {
+    CaseType.hasMany(models.Case, {
+      foreignKey: {
+        name: "case_type_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
+  };
   return CaseType;
 };

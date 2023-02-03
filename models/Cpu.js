@@ -17,5 +17,24 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  Cpu.associate = models => {
+    Cpu.belongsTo(models.Manufacturer, {
+      foreignKey: {
+        name: 'manufac_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Cpu.belongsTo(models.CpuSocket, {
+      foreignKey: {
+        name: 'socket_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+  };
   return Cpu;
 };

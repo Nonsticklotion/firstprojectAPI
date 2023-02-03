@@ -10,5 +10,49 @@ module.exports = (sequelize, DataTypes) => {
   },{
     underscored: true,
   });
+  Motherboard.associate = models => {
+    Motherboard.belongsTo(models.Manufacturer, {
+      foreignKey: {
+        name: 'manufac_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Motherboard.belongsTo(models.CpuSocket, {
+      foreignKey: {
+        name: 'socket_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+
+    Motherboard.belongsTo(models.MbChipset, {
+      foreignKey: {
+        name: 'chipset_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+    Motherboard.belongsTo(models.MbFormfactor, {
+      foreignKey: {
+        name: 'formfactor_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+    Motherboard.belongsTo(models.MemoryType, {
+      foreignKey: {
+        name: 'memory_name',
+        allowNull: false
+      },
+      onUpdate: 'RESTRICT',
+      onDelete: 'RESTRICT'
+    });
+  };
   return Motherboard;
 };

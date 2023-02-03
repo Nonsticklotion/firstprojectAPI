@@ -25,5 +25,16 @@ module.exports = (sequelize, DataTypes) => {
       undersocred: true,
     }
   );
+
+  UserAddress.associate = (models) => {
+    UserAddress.belongsTo(models.User, {
+      foreignKey: {
+        name: "user_address_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
+  }
   return UserAddress;
 };

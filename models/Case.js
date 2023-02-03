@@ -42,6 +42,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
+
+    Case.belongsTo(models.Product, {
+      foreignKey: {
+        name: "case_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return Case;
 };

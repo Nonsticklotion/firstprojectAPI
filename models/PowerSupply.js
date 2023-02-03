@@ -32,6 +32,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
+
+    PowerSupply.belongsTo(models.Product, {
+      foreignKey: {
+        name: "power_supply_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return PowerSupply;
 };

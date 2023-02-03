@@ -38,6 +38,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
+
+    CpuCooler.belongsTo(models.Product, {
+      foreignKey: {
+        name: "cpu_cooler_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return CpuCooler;
 };

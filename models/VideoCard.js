@@ -32,7 +32,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-
+ 
+    VideoCard.belongsTo(models.Product, {
+      foreignKey: {
+        name: "video_card_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return VideoCard;
 };

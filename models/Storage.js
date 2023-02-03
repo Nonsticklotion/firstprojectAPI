@@ -44,6 +44,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'RESTRICT',
       onDelete: 'RESTRICT'
     });
+
+    Storage.belongsTo(models.Product, {
+      foreignKey: {
+        name: "storage_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return Storage;
 };

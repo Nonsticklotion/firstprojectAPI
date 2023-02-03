@@ -35,6 +35,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'RESTRICT',
       onDelete: 'RESTRICT'
     });
+
+    Cpu.belongsTo(models.Product, {
+      foreignKey: {
+        name: "cpu_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return Cpu;
 };

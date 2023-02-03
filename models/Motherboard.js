@@ -53,6 +53,15 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'RESTRICT',
       onDelete: 'RESTRICT'
     });
+
+    Motherboard.belongsTo(models.Product, {
+      foreignKey: {
+        name: "motherboard_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
   };
   return Motherboard;
 };

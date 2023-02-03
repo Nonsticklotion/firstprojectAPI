@@ -15,5 +15,16 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  Order.associate = (models) => {
+    Order.belongsTo(models.OrderItem, {
+      foreignKey: {
+        name: "order_item_id",
+        allowNull: false,
+      },
+      onUpdate: "RESTRICT",
+      onDelete: "RESTRICT",
+    });
+  }
   return Order;
 };

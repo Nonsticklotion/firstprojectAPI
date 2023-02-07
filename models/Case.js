@@ -14,7 +14,6 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
-
   Case.associate = (models) => {
     Case.belongsTo(models.Manufacturer, {
       foreignKey: {
@@ -25,23 +24,23 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     });
 
-    Case.belongsTo(models.MbFormFactor, {
+    Case.belongsTo(models.MbFormfactor, {
       foreignKey: {
-        name: "formfactor_name",
+        name: "mb_formfactor_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
 
-    Case.belongsTo(models.CaseType, {
-      foreignKey: {
-        name: "type_name",
+    Case.belongsTo(models.CaseType,{
+      foreignKey:{
+        name: "casetype_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
-    });
+    })
 
     Case.belongsTo(models.Product, {
       foreignKey: {

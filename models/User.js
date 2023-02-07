@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.UserAddress, {
       foreignKey: {
-        name: "User_Address_id",
+        name: "user_address_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

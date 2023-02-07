@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   CaseType.associate = (models) => {
     CaseType.hasMany(models.Case, {
       foreignKey: {
-        name: "case_type_id",
+        name: "case_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

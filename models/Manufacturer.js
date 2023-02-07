@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Manufacturer.associate = (models) => {
     Manufacturer.hasMany(models.Cpu, {
       foreignKey: {
-        name: "manufac_id",
+        name: "cpu_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.CpuCooler, {
       foreignKey: {
-        name: "manufac_id",
+        name: "cpucooler_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Motherboard, {
       foreignKey: {
-        name: "manufac_id",
+        name: "motherboard_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.VideoCard, {
       foreignKey: {
-        name: "manufac_id",
+        name: "videocard_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Memory, {
       foreignKey: {
-        name: "manufac_id",
+        name: "memory_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Storage, {
       foreignKey: {
-        name: "manufac_id",
+        name: "storage_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Case, {
       foreignKey: {
-        name: "manufac_id",
+        name: "case_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.PowerSupply, {
       foreignKey: {
-        name: "manufac_id",
+        name: "powersupply_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -89,13 +89,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return Manufacturer;
 };
-// Manufacturer.associate = models => {
-  // Manufacturer.hasMany(models.Cpu,{
-  //   foreignKey:{
-  //     name: 'manufac_id',
-  //     allowNull: false
-  //   },
-  //   onUpdate: 'RESTRICT',
-  //   onDelete: 'RESTRICT'
-  // });
-// }

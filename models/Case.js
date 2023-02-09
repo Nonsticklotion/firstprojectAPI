@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     })
 
-    Case.belongsTo(models.Product, {
+    Case.hasOne(models.Product, {
       foreignKey: {
         name: "case_id",
         allowNull: false,

@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: 'RESTRICT',
       onDelete: 'RESTRICT'
     });
-    Memory.belongsTo(models.Product, {
+    Memory.hasOne(models.Product, {
       foreignKey: {
         name: "memory_id",
         allowNull: false,

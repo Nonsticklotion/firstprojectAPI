@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     });
 
-    Cpu.belongsTo(models.Product, {
+    Cpu.hasOne(models.Product, {
       foreignKey: {
         name: "cpu_id",
         allowNull: false,

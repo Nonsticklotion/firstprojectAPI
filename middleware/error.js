@@ -1,3 +1,4 @@
-module.exports = (err, res, req, next) => {
-  res.status(err.statusCode).json({ message: err.message });
+module.exports = (err, req, res, next) => {
+  console.log(err);
+  // res.sendStatus(err.statusCode).json({ message: err.message });
 };

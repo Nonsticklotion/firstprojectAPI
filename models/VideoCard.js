@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     });
  
-    VideoCard.belongsTo(models.Product, {
+    VideoCard.hasOne(models.Product, {
       foreignKey: {
         name: "video_card_id",
         allowNull: false,

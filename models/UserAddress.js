@@ -29,7 +29,7 @@
     UserAddress.associate = (models) => {
       UserAddress.belongsTo(models.User, {
         foreignKey: {
-          name: "user_address_id",
+          name: "user_id",
           allowNull: false,
         },
         onUpdate: "RESTRICT",

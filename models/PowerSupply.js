@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "RESTRICT",
     });
 
-    PowerSupply.belongsTo(models.Product, {
+    PowerSupply.hasOne(models.Product, {
       foreignKey: {
         name: "power_supply_id",
         allowNull: false,

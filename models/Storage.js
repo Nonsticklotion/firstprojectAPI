@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'RESTRICT'
     });
 
-    Storage.belongsTo(models.Product, {
+    Storage.hasOne(models.Product, {
       foreignKey: {
         name: "storage_id",
         allowNull: false,

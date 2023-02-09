@@ -44,7 +44,8 @@ module.exports = (sequelize, DataTypes) => {
     OrderItem.belongsTo(models.User, {
       foreignKey: {
         name: "user_id",
-        allowNull: false,
+        allowNull: true,
+        defaultValue: null
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

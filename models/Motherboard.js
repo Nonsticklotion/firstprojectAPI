@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'RESTRICT'
     });
 
-    Motherboard.belongsTo(models.Product, {
+    Motherboard.hasOne(models.Product, {
       foreignKey: {
         name: "motherboard_id",
         allowNull: false,

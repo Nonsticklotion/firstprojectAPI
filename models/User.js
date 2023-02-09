@@ -42,9 +42,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   User.associate = (models) => {
-    User.belongsTo(models.OrderItem, {
+    User.hasMany(models.OrderItem, {
       foreignKey: {
-        name: "order_item_id",
+        name: "user_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 
     User.hasMany(models.UserAddress, {
       foreignKey: {
-        name: "user_address_id",
+        name: "user_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

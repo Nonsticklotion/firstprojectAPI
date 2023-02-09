@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 
 const authRouter = require("./route/authRoute");
+const authenticate = require("./middleware/authenticate")
 
 const notFoundMiddleware = require("./middleware/notFound");
 const errorMiddleware = require("./middleware/error");
@@ -20,7 +21,7 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/auth", authRouter);
+app.use("/auth",authenticate, authRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorMiddleware);

@@ -3,7 +3,7 @@ const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Op } = require("sequelize");
-const { User, UserAddress } = require("../models");
+const { User } = require("../models");
 
 const genToken = (payload) =>
   jwt.sign(payload, process.env.JWT_SECRET_KEY, {

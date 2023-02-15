@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Storage.belongsTo(models.StorageType, {
       foreignKey: {
-        name: 'storage',
+        name: 'storage_type_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Storage.belongsTo(models.StorageFormfactor, {
       foreignKey: {
-        name: 'storage_form',
+        name: 'storage_formfactor_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',

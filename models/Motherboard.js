@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Motherboard.belongsTo(models.CpuSocket, {
       foreignKey: {
-        name: 'socket_name',
+        name: 'socket_name_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Motherboard.belongsTo(models.MbChipset, {
       foreignKey: {
-        name: 'chipset_name',
+        name: 'mb_chipset_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Motherboard.belongsTo(models.MbFormfactor, {
       foreignKey: {
-        name: 'formfactor_name',
+        name: 'mb_formfactor_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     Motherboard.belongsTo(models.MemoryType, {
       foreignKey: {
-        name: 'memory_name',
+        name: 'memorytype_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',

@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   OrderItem.associate = (models) => {
     OrderItem.belongsTo(models.Product, {
       foreignKey: {
-        name: "product_id",
+        name: "orderitem_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

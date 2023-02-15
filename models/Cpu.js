@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Cpu.belongsTo(models.CpuSocket, {
       foreignKey: {
-        name: "socket_name",
+        name: "socket_name_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

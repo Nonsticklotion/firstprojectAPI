@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Memory.belongsTo(models.MemoryType, {
       foreignKey: {
-        name: 'memory_name',
+        name: 'memorytype_id',
         allowNull: false
       },
       onUpdate: 'RESTRICT',

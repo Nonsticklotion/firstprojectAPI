@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
   Product.associate = (models) => {
-    Product.hasOne(models.Cpu, {
+    Product.belongsTo(models.Cpu, {
       foreignKey: {
         name: "cpu_id",
         allowNull: true,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.CpuCooler, {
+    Product.belongsTo(models.CpuCooler, {
       foreignKey: {
         name: "cpu_cooler_id",
         allowNull: true,
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.Motherboard, {
+    Product.belongsTo(models.Motherboard, {
       foreignKey: {
         name: "motherboard_id",
         allowNull: true,
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.VideoCard, {
+    Product.belongsTo(models.VideoCard, {
       foreignKey: {
         name: "videocard_id",
         allowNull: true,
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.Memory, {
+    Product.belongsTo(models.Memory, {
       foreignKey: {
         name: "memory_id",
         allowNull: true,
@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.Storage, {
+    Product.belongsTo(models.Storage, {
       foreignKey: {
         name: "storage_id",
         allowNull: true,
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.Case, {
+    Product.belongsTo(models.Case, {
       foreignKey: {
         name: "case_id",
         allowNull: true,
@@ -77,7 +77,7 @@ module.exports = (sequelize, DataTypes) => {
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-    Product.hasOne(models.PowerSupply, {
+    Product.belongsTo(models.PowerSupply, {
       foreignKey: {
         name: "powersupply_id",
         allowNull:true,
@@ -88,8 +88,8 @@ module.exports = (sequelize, DataTypes) => {
     
     Product.hasMany(models.OrderItem, {
       foreignKey: {
-        name: "product_id",
-        allowNull: true,
+        name: "orderitem_id",
+        allowNull: false,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

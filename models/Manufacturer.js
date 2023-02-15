@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Manufacturer.associate = (models) => {
     Manufacturer.hasMany(models.Cpu, {
       foreignKey: {
-        name: "cpu_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.CpuCooler, {
       foreignKey: {
-        name: "cpucooler_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Motherboard, {
       foreignKey: {
-        name: "motherboard_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.VideoCard, {
       foreignKey: {
-        name: "videocard_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Memory, {
       foreignKey: {
-        name: "memory_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Storage, {
       foreignKey: {
-        name: "storage_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -71,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Case, {
       foreignKey: {
-        name: "case_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.PowerSupply, {
       foreignKey: {
-        name: "powersupply_id",
+        name: "manufac_name",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

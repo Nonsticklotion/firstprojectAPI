@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   MemoryType.associate = models => {
     MemoryType.hasMany(models.Motherboard,{
     foreignKey:{
-      name: 'memory_id',
+      name: 'memorytype_id',
       allowNull: false
     },
     onUpdate: 'RESTRICT',
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   MemoryType.hasMany(models.Memory,{
     foreignKey:{
-      name: 'memory_id',
+      name: 'memorytype_id',
       allowNull: false
     },
     onUpdate: 'RESTRICT',

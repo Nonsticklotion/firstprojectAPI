@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
 
     VideoCard.belongsTo(models.GpuChipset, {
       foreignKey: {
-        name: "chipset_name",
+        name: "gpu_chipset_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -35,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
  
     VideoCard.hasOne(models.Product, {
       foreignKey: {
-        name: "video_card_id",
+        name: "videocard_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

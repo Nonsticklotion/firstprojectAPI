@@ -68,13 +68,6 @@ exports.signup = async (req, res, next) => {
       password: hashedPassword,
       phoneNumber: isMobilePhone ? phoneNumber : null,
     });
-    // const address= await UserAddress.create({
-    //   address1,
-    //   address2,
-    //   city,
-    //   state,
-    //   zip,
-    // });
 
     const token = genToken({ id: user.id });
     res.status(201).json({ token });

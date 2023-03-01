@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   PowerSupply.associate = (models) => {
     PowerSupply.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     PowerSupply.hasOne(models.Product, {
       foreignKey: {
         name: "powesupply_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

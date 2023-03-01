@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Case.associate = (models) => {
     Case.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     Case.hasOne(models.Product, {
       foreignKey: {
         name: "case_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

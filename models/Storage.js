@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   Storage.associate = models => {
     Storage.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: 'manufac_name',
+        name: 'manufacid',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -48,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     Storage.hasOne(models.Product, {
       foreignKey: {
         name: "storage_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

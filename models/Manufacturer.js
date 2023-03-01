@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notEmpty: true,
+          notEmpty: true
+          
         },
       },
     },
@@ -17,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   Manufacturer.associate = (models) => {
     Manufacturer.hasMany(models.Cpu, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -26,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.CpuCooler, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -35,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Motherboard, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -44,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.VideoCard, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -53,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Memory, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -62,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Storage, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -71,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.Case, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -80,7 +81,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Manufacturer.hasMany(models.PowerSupply, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

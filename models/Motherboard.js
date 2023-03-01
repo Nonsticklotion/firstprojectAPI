@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   Motherboard.associate = models => {
     Motherboard.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: 'manufac_name',
+        name: 'manufacid',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
     Motherboard.hasOne(models.Product, {
       foreignKey: {
         name: "motherboard_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   VideoCard.associate = (models) => {
     VideoCard.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     VideoCard.hasOne(models.Product, {
       foreignKey: {
         name: "videocard_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

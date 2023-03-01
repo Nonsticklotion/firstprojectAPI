@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   CpuCooler.associate = (models) => {
     CpuCooler.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: "manufac_name",
+        name: "manufacid",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -42,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     CpuCooler.hasOne(models.Product, {
       foreignKey: {
         name: "cpu_cooler_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

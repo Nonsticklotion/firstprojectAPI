@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
   Memory.associate = models => {
     Memory.belongsTo(models.Manufacturer, {
       foreignKey: {
-        name: 'manufac_name',
+        name: 'manufacid',
         allowNull: false
       },
       onUpdate: 'RESTRICT',
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     Memory.hasOne(models.Product, {
       foreignKey: {
         name: "memory_id",
-        allowNull: false,
+        allowNull: true,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",

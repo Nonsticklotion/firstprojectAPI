@@ -513,64 +513,288 @@ exports.createProduct = async (req, res, next) => {
         break;
 
       case "PowerSupply":
-       const findmanfacPS = await Manufacturer.findOne({
-        where: { manufacName: extend3 },
-      });
-       const findefficen= await Efficiency.findOne({
-        where: { efficiencyRating: extend1 },
-      });
+        const findmanfacPS = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findefficen = await Efficiency.findOne({
+          where: { efficiencyRating: extend1 },
+        });
 
-      let manfacPS, efficen
+        let manfacPS, efficen;
 
-      if(findmanfacPS) {
-        manfacPS = findmanfacPS
-      }else {
-        manfacPS = await Manufacturer.create({
-          manufacName: extend3 
-        })
-      }
-      if(findefficen){
-        efficen = findefficen
-      }else{
-        efficen = await Efficiency.create({
-          efficiencyRating: extend1
-        })
-      }
-      
-      const powersupply = await PowerSupply.create({
-        wattage : extend4,
-        manufacid : manfacPS.id,
-        efficiency_id : efficen.id
-      })
+        if (findmanfacPS) {
+          manfacPS = findmanfacPS;
+        } else {
+          manfacPS = await Manufacturer.create({
+            manufacName: extend3,
+          });
+        }
+        if (findefficen) {
+          efficen = findefficen;
+        } else {
+          efficen = await Efficiency.create({
+            efficiencyRating: extend1,
+          });
+        }
 
-      const productPS = await Product.create({
-        powesupply_id:  powersupply.id,
-        description: description,
-        picture: picture,
-        amountLeft: amountLeft,
-        price: price,
-      });
+        const powersupply = await PowerSupply.create({
+          wattage: extend4,
+          manufacid: manfacPS.id,
+          efficiency_id: efficen.id,
+        });
 
-      res.json({
-        id : powersupply.id,
-        wattage : powersupply.wattage,
-        manufacturer: {
-          id: manfacPS.id,
-        },
-        efficiency : {
-          id : efficen.id
-        },
-        product: {
+        const productPS = await Product.create({
           powesupply_id: powersupply.id,
           description: description,
           picture: picture,
           amountLeft: amountLeft,
           price: price,
-        },
-      })
+        });
+
+        res.json({
+          id: powersupply.id,
+          wattage: powersupply.wattage,
+          manufacturer: {
+            id: manfacPS.id,
+          },
+          efficiency: {
+            id: efficen.id,
+          },
+          product: {
+            powesupply_id: powersupply.id,
+            description: description,
+            picture: picture,
+            amountLeft: amountLeft,
+            price: price,
+          },
+        });
         break;
     }
   } catch (err) {
     next(err);
   }
 };
+
+exports.updateProduct = async (req, res, next) => {
+  try {
+    const { table, productid, amountLeft, price } = req.body;
+    switch (table) {
+      case "Cpu":
+        const cpuproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { cpu_id: productid },
+          }
+        );
+
+        const cpuupdatedProduct = await Product.findOne({
+          where: { cpu_id: productid },
+        });
+
+        res.json({
+          id: cpuupdatedProduct.id,
+          cpu_id: cpuupdatedProduct.cpu_id,
+          description: cpuupdatedProduct.description,
+          picture: cpuupdatedProduct.picture,
+          amountLeft: cpuupdatedProduct.amountLeft,
+          price: cpuupdatedProduct.price,
+        });
+        break;
+
+      case "Cpucooler":
+        const cpucoolerproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { cpu_cooler_id: productid },
+          }
+        );
+
+        const cpucoolerupdatedProduct = await Product.findOne({
+          where: { cpu_cooler_id: productid },
+        });
+
+        res.json({
+          id: cpucoolerupdatedProduct.id,
+          cpu_cooler_id: cpucoolerupdatedProduct.cpu_cooler_id,
+          description: cpucoolerupdatedProduct.description,
+          picture: cpucoolerupdatedProduct.picture,
+          amountLeft: cpucoolerupdatedProduct.amountLeft,
+          price: cpucoolerupdatedProduct.price,
+        });
+
+        break;
+
+      case "Motherboard":
+        const motherboardproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { motherboard_id: productid },
+          }
+        );
+
+        const motherboardupdatedProduct = await Product.findOne({
+          where: { motherboard_id: productid },
+        });
+
+        res.json({
+          id: motherboardupdatedProduct.id,
+          motherboard_id: motherboardupdatedProduct.motherboard_id,
+          description: motherboardupdatedProduct.description,
+          picture: motherboardupdatedProduct.picture,
+          amountLeft: motherboardupdatedProduct.amountLeft,
+          price: motherboardupdatedProduct.price,
+        });
+
+        break;
+
+      case "VideoCard":
+        const gpuproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { videocard_id: productid },
+          }
+        );
+
+        const gpuupdatedProduct = await Product.findOne({
+          where: { videocard_id: productid },
+        });
+
+        res.json({
+          id: gpuupdatedProduct.id,
+          videocard_id: gpuupdatedProduct.videocard_id,
+          description: gpuupdatedProduct.description,
+          picture: gpuupdatedProduct.picture,
+          amountLeft: gpuupdatedProduct.amountLeft,
+          price: gpuupdatedProduct.price,
+        });
+
+        break;
+
+      case "Memory":
+        const memproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { memory_id: productid },
+          }
+        );
+
+        const memupdatedProduct = await Product.findOne({
+          where: { memory_id: productid },
+        });
+
+        res.json({
+          id: memupdatedProduct.id,
+          memory_id: memupdatedProduct.memory_id,
+          description: memupdatedProduct.description,
+          picture: memupdatedProduct.picture,
+          amountLeft: memupdatedProduct.amountLeft,
+          price: memupdatedProduct.price,
+        });
+
+        break;
+
+      case "Storage":
+        const storageproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { storage_id: productid },
+          }
+        );
+
+        const storageupdatedProduct = await Product.findOne({
+          where: { storage_id: productid },
+        });
+
+        res.json({
+          id: storageupdatedProduct.id,
+          storage_id: storageupdatedProduct.storage_id,
+          description: storageupdatedProduct.description,
+          picture: storageupdatedProduct.picture,
+          amountLeft: storageupdatedProduct.amountLeft,
+          price: storageupdatedProduct.price,
+        });
+
+        break;
+
+      case "Case":
+        const caseproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { case_id: productid },
+          }
+        );
+
+        const caseupdatedProduct = await Product.findOne({
+          where: { case_id: productid },
+        });
+
+        res.json({
+          id: caseupdatedProduct.id,
+          case_id: caseupdatedProduct.case_id,
+          description: caseupdatedProduct.description,
+          picture: caseupdatedProduct.picture,
+          amountLeft: caseupdatedProduct.amountLeft,
+          price: caseupdatedProduct.price,
+        });
+
+        break;
+
+      case "PowerSupply":
+        const PSproduct = await Product.update(
+          {
+            amountLeft: amountLeft,
+            price: price,
+          },
+          {
+            where: { powersupply_id: productid },
+          }
+        );
+
+        const PSupdatedProduct = await Product.findOne({
+          where: { powersupply_id: productid },
+        });
+
+        res.json({
+          id: PSupdatedProduct.id,
+          powersupply_id: PSupdatedProduct.powersupply_id,
+          description: PSupdatedProduct.description,
+          picture: PSupdatedProduct.picture,
+          amountLeft: PSupdatedProduct.amountLeft,
+          price: PSupdatedProduct.price,
+        });
+
+        break;
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.deleteProduct = async (req,res,next) => {
+  try{
+  
+  }catch(err){
+    next(err)
+  }
+}

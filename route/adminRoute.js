@@ -6,6 +6,8 @@ const router = express.Router()
 
 
 router.post("/addproduct",adminController.createProduct)
+router.put("/updateproduct",adminController.updateProduct)
+router.delete("/addproduct",adminController.deleteProduct)
 
 // router.delete("/efficiency",adminController)
 

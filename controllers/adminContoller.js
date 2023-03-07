@@ -21,6 +21,7 @@ const {
   VideoCard,
 } = require("../models");
 
+const deleteText = "Product deleted successfully";
 exports.createProduct = async (req, res, next) => {
   try {
     const {
@@ -791,10 +792,509 @@ exports.updateProduct = async (req, res, next) => {
   }
 };
 
-exports.deleteProduct = async (req,res,next) => {
-  try{
-  
-  }catch(err){
-    next(err)
+exports.deleteProduct = async (req, res, next) => {
+  try {
+    const { table, productid } = req.body;
+    switch (table) {
+      case "Cpu":
+        await Product.destroy({
+          where: { cpu_id: productid },
+        });
+        await Cpu.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "Cpucooler":
+        await Product.destroy({
+          where: { cpu_cooler_id: productid },
+        });
+        await CpuCooler.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "Motherboard":
+        await Product.destroy({
+          where: { motherboard_id: productid },
+        });
+        await Motherboard.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "VideoCard":
+        await Product.destroy({
+          where: { videocard_id: productid },
+        });
+        await VideoCard.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "Memory":
+        await Product.destroy({
+          where: { memory_id: productid },
+        });
+        await Memory.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "Storage":
+        await Product.destroy({
+          where: { storage_id: productid },
+        });
+        await Storage.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "Case":
+        await Product.destroy({
+          where: { case_id: productid },
+        });
+        await Case.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+
+      case "PowerSupply":
+        await Product.destroy({
+          where: { powersupply_id: productid },
+        });
+        await PowerSupply.destroy({
+          where: { id: productid },
+        });
+        res.json({ message: deleteText });
+        break;
+    }
+  } catch (err) {
+    next(err);
   }
-}
+};
+
+exports.getProduct = async (req, res, next) => {
+  try {
+    const {
+      table,
+      extend1,
+      extend2,
+      extend3,
+      extend4,
+      extend5,
+      extend6,
+      description,
+      picture,
+      sort,
+      price,
+    } = req.body;
+
+    switch (table) {
+      case "Cpu":
+        const manfacCpu = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findSocketName = await CpuSocket.findOne({
+          where: { socketName: extend4 },
+        });
+        const findCpu = await Cpu.findAll({
+          where: {
+            seriesName: extend1 || null,
+            manufacid: manfacCpu.id || null,
+            socket_name_id: findSocketName.id || null,
+          },
+        });
+
+        const cpuIds = findCpu.map((cpu) => cpu.id);
+
+        const findCpuProduct = await Product.findAll({
+          where: {
+            cpu_id: cpuIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseCpu = findCpu.map((cpu) => ({
+          id: cpu.id,
+          seriesName: cpu.seriesName,
+          tdp: cpu.tdp,
+          manufacturer: {
+            id: manfacCpu.id,
+            name: manfacCpu.manufacName,
+          },
+          socket: {
+            id: findSocketName.id,
+            name: findSocketName.socketName,
+          },
+          product: findCpuProduct.find((x) => x.cpu_id === cpu.id),
+        }));
+
+        res.json(responseCpu);
+        break;
+
+      case "CpuCooler":
+        const manfacCpuCooler = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findSocketNameCooler = await CpuSocket.findOne({
+          where: { seriesName: extend4 },
+        });
+        const findCpuCooler = await CpuCooler.findAll({
+          where: {
+            waterCooler: extend1 || null,
+            manufacid: manfacCpu.id || null,
+            socket_name_id: findSocketName.id || null,
+          },
+        });
+
+        const CpuCoolerIds = findCpuCooler.map((x) => x.id);
+
+        const findCpuCoolerProduct = await Product.findAll({
+          where: {
+            cpu_cooler_id: CpuCoolerIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseCpuCooler = findCpuCooler.map((x) => ({
+          id: x.id,
+          socketName: x.socketName,
+          tdp: x.tdp,
+          manufacturer: {
+            id: manfacCpuCooler.id,
+            name: manfacCpuCooler.manufacName,
+          },
+          socket: {
+            id: findSocketNameCooler.id,
+            socketName: findSocketNameCooler.socketName,
+          },
+          product: findCpuCoolerProduct.find((x) => x.cpu_cooler_id === x.id),
+        }));
+        res.json(responseCpuCooler);
+        break;
+
+      case "Motherboard":
+        const manfacMotherboard = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findSocketNameMB = await CpuSocket.findOne({
+          where: { socketName: extend4 },
+        });
+        const findMBmemorytype = await MemoryType.findOne({
+          where: { memoryName: extend1 },
+        });
+        const findMBChipset = await MbChipset.findOne({
+          where: { chipsetName: extend5 },
+        });
+        const findMbformfactor = await MbFormfactor.findOne({
+          where: { formfactorName: extend6 },
+        });
+
+        const findMB = await Motherboard.findAll({
+          where: {
+            manufacid: manfacMotherboard.id || null,
+            socket_name_id: findSocketNameMB.id || null,
+            mb_chipset_id: findMBChipset.id || null,
+            mb_formfactor_id: findMbformfactor.id || null,
+            memorytype_id: findMBmemorytype.id || null,
+          },
+        });
+
+        const MBIds = findMB.map((x) => x.id);
+
+        const findMBProduct = await Product.findAll({
+          where: {
+            motherboard_id: MBIds,
+            order: [["price", sort === "asc" ? "ASC" : "DESC"]],
+          },
+        });
+
+        const responseMB = findMB.map((x) => ({
+          id: x.id,
+          tdp: x.tdp,
+          manufacturer: {
+            id: manfacMotherboard.id,
+            manufacName: manfacMotherboard.manufacName,
+          },
+          socket: {
+            id: findSocketNameMB.id,
+            name: findSocketNameMB.socketName,
+          },
+          MbChipset: {
+            id: findMBChipset.id,
+            name: findMBChipset.chipsetName,
+          },
+          MbFormfactor: {
+            id: findMbformfactor.id,
+            name: findMbformfactor.formfactorName,
+          },
+          Memorytype: {
+            id: findMBmemorytype.id,
+            name: findMBmemorytype.memoryName,
+          },
+          product: findMBProduct.find((x) => x.videocard_id === x.id),
+        }));
+        res.json(responseMB);
+        break;
+
+      case "VideoCard":
+        const manfacGpu = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findGpuChipset = await GpuChipset.findOne({
+          where: { chipsetName: extend1 },
+        });
+        const findGpu = await VideoCard.findAll({
+          where: {
+            manufacid: manfacGpu.id || null,
+            gpu_chipset_id: findGpuChipset.id || null,
+          },
+        });
+
+        const gpuIds = findGpu.map((x) => x.id);
+
+        const findGpuProduct = await Product.findAll({
+          where: {
+            videocard_id: gpuIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseGpu = findGpu.map((x) => ({
+          id: x.id,
+          tdp: x.tdp,
+          manufacturer: {
+            id: manfacMotherboard.id,
+            manufacName: manfacMotherboard.manufacName,
+          },
+          gpuchipset: {
+            id: findGpuChipset.id,
+            name: findGpuChipset.chipsetName,
+          },
+          product: findGpuProduct.find((x) => x.videocard_id === x.id),
+        }));
+        res.json(responseGpu);
+        break;
+
+      case "Memory":
+        const manfacMem = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findmemorytype = await MemoryType.findOne({
+          where: { memoryName: extend1 },
+        });
+        const findMemory = await Memory.findAll({
+          where: {
+            capacity: extend4 || null,
+            speed: extend5 || null,
+            manufacid: manfacMem.id || null,
+            memorytype_id: findmemorytype.id || null,
+          },
+        });
+
+        const memoryIds = findMemory.map((x) => x.id);
+
+        const findMemoryProduct = await Product.findAll({
+          where: {
+            memory_id: memoryIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseMemory = findMemory.map((x) => ({
+          id: x.id,
+          capacity: x.capacity,
+          speed: x.speed,
+          tdp: x.tdp,
+          manufacturer: {
+            id: manfacMem.id,
+            name: manfacMem.manufacName,
+          },
+          memorytype: {
+            id: findmemorytype.id,
+            name: findmemorytype.memoryName,
+          },
+          product: findMemoryProduct.find((x) => x.memorytype_id === x.id),
+        }));
+
+        res.json(responseMemory);
+        break;
+
+      case "Storage":
+        const manfacStorage = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findStoragetype = await StorageType.findOne({
+          where: { storage: extend5 },
+        });
+        const findStorageForm = await StorageFormfactor.findOne({
+          where: { StorageForm: extend1 },
+        });
+
+        const findStorage = await Storage.findAll({
+          where: {
+            capacity: extend4 || null,
+            manufacid: manfacStorage.id || null,
+            storage_type_id: findStoragetype.id || null,
+            storage_formfactor_id: findStorageForm.id || null,
+          },
+        });
+
+        const storageIds = findStorage.map((x) => x.id);
+
+        const findStorageProduct = await Product.findAll({
+          where: {
+            storage_id: storageIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseStorage = findStorage.map((x) => ({
+          id: x.id,
+          capacity: x.capacity,
+          tdp: x.tdp,
+          manufacturer: {
+            id: manfacStorage.id,
+            name: manfacStorage.manufacName,
+          },
+          storagetype: {
+            id: findStoragetype.id,
+            name: findStoragetype.storage,
+          },
+          storageformfactor: {
+            id: findStorageForm.id,
+            name: findStorageForm.StorageForm,
+          },
+          product: findStorageProduct.find(
+            (x) => x.storage_formfactor_id === x.id
+          ),
+        }));
+
+        res.json(responseStorage);
+        break;
+
+      case "Case":
+        const manfacCase = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findCaseMBForm = await MbFormfactor.findOne({
+          where: { formfactorName: extend6 },
+        });
+        const findCaseType = await CaseType.findOne({
+          where: { typeName: extend5 },
+        });
+
+        const findCase = await Case.findAll({
+          where: {
+            manufacid: manfacCase.id || null,
+            mb_formfactor_id: findCaseMBForm.id || null,
+            casetype_id: findCaseType.id || null,
+          },
+        });
+
+        const caseIds = findCase.map((x) => x.id);
+
+        const findCaseProduct = await Product.findAll({
+          where: {
+            case_id: caseIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responseCase = findCase.map((x) => ({
+          id: x.id,
+          powersupply: x.powersupply,
+          manufacturer: {
+            id: manfacCase.id,
+            name: manfacCase.manufacName,
+          },
+          mbFormfactor: {
+            id: findCaseMBForm.id,
+            name: findCaseMBForm.formfactorName,
+          },
+          caseType: {
+            id: findCaseType.id,
+            name: findCaseType.typeName,
+          },
+          product: findCaseProduct.find((x) => x.case_id === x.id),
+        }));
+
+        res.json(responseCase);
+        break;
+
+      case "PowerSupply":
+        const manfacPS = await Manufacturer.findOne({
+          where: { manufacName: extend3 },
+        });
+        const findefficency = await Efficiency.findOne({
+          where: {
+            efficiencyRating: extend1,
+          },
+        });
+
+        const findPowerSupply = await PowerSupply.findAll({
+          where: {
+            wattage: extend4 || null,
+            manufacid: manfacPS.id || null,
+            efficiency_id: findefficency.id || null,
+          },
+        });
+
+        const powersupplyIds = findPowerSupply.map((x) => x.id);
+
+        const findPowerSupplyProduct = await Product.findAll({
+          where: {
+            powesupply_id: powersupplyIds,
+            order: [
+              ["price", sort === "asc" ? "ASC" : "DESC"],
+              ["id", "ASC"],
+            ],
+          },
+        });
+
+        const responsePowerSupply = findPowerSupply.map((x) => ({
+          id: x.id,
+          wattage: x.wattage,
+          manufacturer: {
+            id: manfacPS.id,
+            name: manfacPS.manufacName,
+          },
+          efficiency: {
+            id: findefficency.id,
+            name: findefficency.efficiencyRating,
+          },
+          product: findPowerSupplyProduct.find((x) => x.efficiency_id === x.id),
+        }));
+        res.json(responsePowerSupply);
+        break;
+    }
+  } catch (err) {
+    next(err);
+  }
+};

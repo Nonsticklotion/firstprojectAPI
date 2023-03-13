@@ -88,7 +88,7 @@ module.exports = (sequelize, DataTypes) => {
     
     Product.hasMany(models.OrderItem, {
       foreignKey: {
-        name: "orderitem_id",
+        name: "product_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",

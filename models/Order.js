@@ -4,11 +4,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       picture_money: {
         type: DataTypes.STRING,
-        defaultValue: "Please upload your script",
       },
       status: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
+      },
+      all_money: {
+        type: DataTypes.INTEGER,
       },
     },
     {
@@ -19,12 +21,12 @@ module.exports = (sequelize, DataTypes) => {
   Order.associate = (models) => {
     Order.hasMany(models.OrderItem, {
       foreignKey: {
-        name: "order_item_id",
+        name: "order_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-  }
+  };
   return Order;
 };

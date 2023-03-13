@@ -9,10 +9,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       totalPrice: DataTypes.INTEGER,
-      status: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
-      },
       order_date: {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
@@ -25,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   OrderItem.associate = (models) => {
     OrderItem.belongsTo(models.Product, {
       foreignKey: {
-        name: "orderitem_id",
+        name: "product_id",
         allowNull: false,
       },
       onUpdate: "RESTRICT",
@@ -45,11 +41,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: {
         name: "user_id",
         allowNull: true,
-        defaultValue: null
+        defaultValue: null,
       },
       onUpdate: "RESTRICT",
       onDelete: "RESTRICT",
     });
-  }
+  };
   return OrderItem;
 };

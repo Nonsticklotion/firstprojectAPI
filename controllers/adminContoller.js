@@ -1298,3 +1298,12 @@ exports.getProduct = async (req, res, next) => {
     next(err);
   }
 };
+
+exports.orderManage = async (req, res, next) => {
+  try{
+  
+  }catch(err){
+    next(err)
+  }
+};
+
